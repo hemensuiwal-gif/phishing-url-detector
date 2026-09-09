@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="URL risk assessment results.">
+    <title>Scan Result | Phishing URL Detector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="site-shell result-shell">
+        <nav class="topbar" aria-label="Main navigation">
+            <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">></span> PHISHING URL DETECTOR</a>
+            <a class="text-link" href="{{ url_for('index') }}">&#8592; New scan</a>
+        </nav>
+
+        <section class="result-header reveal">
+            <div><p class="eyebrow">SCAN COMPLETE / URL RISK ASSESSMENT</p><h1>Read the signals.</h1></div>
+            <p class="result-disclaimer">This is an educational assessment based on URL characteristics. It is not proof that a website is safe or malicious.</p>
+        </section>
+
+        <section class="score-layout reveal delay-1">
+            <div class="score-card tone-{{ report.tone }}">
+                <div class="score-card-top"><span>RISK SCORE</span><span>0 — 100</span></div>
+                <div class="score-value">{{ report.score }}<small>/100</small></div>
+                <div class="meter" role="meter" aria-label="Risk score" aria-valuenow="{{ report.score }}" aria-valuemin="0" aria-valuemax="100"><span style="width: {{ report.score }}%"></span></div>
+                <div class="classification"><span class="classification-dot"></span><strong>{{ report.classification }}</strong></div>
+                <p>{{ report.summary }}</p>
+            </div>
+            <div class="url-card">
+                <p class="eyebrow">SUBMITTED URL</p>
+                <code>{{ report.url }}</code>
+                <div class="url-facts"><span>SUBDOMAINS <strong>{{ report.subdomains }}</strong></span><span>PATH PREVIEW <strong>{{ report.path_preview or '/' }}</strong></span></div>
+            </div>
+        </section>
+
+        <section class="checks-section reveal delay-2">
+            <div class="section-heading"><div><p class="eyebrow">TRANSPARENT BREAKDOWN</p><h2>What was checked</h2></div><span class="check-legend"><i class="legend-pass"></i> PASS <i class="legend-warning"></i> WARNING</span></div>
+            <div class="checks-grid">
+                {% for check in report.checks %}
+                <article class="check-card status-{{ check.status }}">
+                    <div class="check-card-top"><span class="check-icon">{% if check.status == 'pass' %}&#10003;{% else %}!{% endif %}</span><span class="check-status">{{ check.status }}</span></div>
+                    <h3>{{ check.name }}</h3><p>{{ check.detail }}</p>
+                    {% if check.points %}<span class="points">+{{ check.points }} risk points</span>{% else %}<span class="points neutral">No points added</span>{% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="score-guide reveal delay-3">
+            <div><p class="eyebrow">SCORING GUIDE</p><h2>How to read the score</h2></div>
+            <div class="guide-items"><div><strong>0—30</strong><span class="guide-safe">Likely Safe</span><p>Few URL-based warning signals were found.</p></div><div><strong>31—60</strong><span class="guide-suspicious">Suspicious</span><p>Review the warnings before trusting the link.</p></div><div><strong>61—100</strong><span class="guide-danger">Potential Phishing</span><p>Several indicators deserve strong caution.</p></div></div>
+        </section>
+
+        <div class="bottom-callout"><strong>Remember:</strong> HTTPS only encrypts a connection. It does not prove that the website owner is trustworthy.</div>
+        <footer><span>PHISHING URL DETECTOR / STUDENT CYBERSECURITY PROJECT</span><span><a href="{{ url_for('index') }}">RUN ANOTHER SCAN &#8594;</a></span></footer>
+    </main>
+</body>
+</html>
