@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Educational URL risk analyzer for phishing awareness.">
+    <title>Phishing URL Detector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="site-shell" id="app">
+        <nav class="topbar" aria-label="Main navigation">
+            <a class="brand" href="#"><span class="brand-mark">></span> PHISHING URL DETECTOR</a>
+            <span class="status-pill"><span class="status-dot"></span> EDUCATIONAL TOOL</span>
+        </nav>
+
+        <section class="hero-grid">
+            <div class="hero-copy reveal">
+                <p class="eyebrow">DEFENSIVE CYBERSECURITY / URL ANALYSIS</p>
+                <h1>Pause before<br><em>you click.</em></h1>
+                <p class="hero-text">Analyze a URL for common phishing indicators and learn how to identify potentially suspicious links.</p>
+                <div class="hero-note"><span>01</span><p>Transparent checks. No website visits. No credentials collected.</p></div>
+            </div>
+
+            <div class="analyzer-panel reveal delay-1">
+                <div class="panel-heading"><div><p class="eyebrow">QUICK SCAN</p><h2>Inspect a link</h2></div><span class="panel-code">SCAN_001</span></div>
+                <div class="alert error" id="error" role="alert" hidden></div>
+                <form id="url-form">
+                    <label for="url">URL to analyze</label>
+                    <div class="input-wrap"><span class="input-prefix">https://</span><input id="url" name="url" type="url" placeholder="example.com" maxlength="2048" required autocomplete="off"></div>
+                    <div class="field-meta"><span>Use a complete URL including https://</span><span id="char-count">0 / 2048</span></div>
+                    <button class="primary-button" type="submit"><span>Analyze URL</span><span class="button-arrow">&#8594;</span></button>
+                </form>
+                <div class="try-these"><span>TRY A SAFE EXAMPLE</span><button type="button" data-example="https://example.com">example.com</button><button type="button" data-example="https://www.python.org">python.org</button></div>
+            </div>
+        </section>
+
+        <section class="feature-strip reveal delay-2" aria-label="How it works">
+            <div><span class="feature-number">01</span><h3>Parse</h3><p>Read the URL structure without visiting its destination.</p></div>
+            <div><span class="feature-number">02</span><h3>Score</h3><p>Apply simple, documented points to warning signals.</p></div>
+            <div><span class="feature-number">03</span><h3>Understand</h3><p>See the individual checks behind the result.</p></div>
+        </section>
+        <section class="tips-band reveal delay-3"><div><p class="eyebrow">FIELD NOTES</p><h2>Six habits that reduce phishing risk.</h2></div><ol class="tips-list"><li>Check the domain name carefully.</li><li>Do not blindly click suspicious links.</li><li>Verify through an official source.</li><li>Be cautious with urgent messages.</li><li>Watch for spelling or domain changes.</li><li>Never enter sensitive data on an untrusted page.</li></ol></section>
+        <footer><span>PHISHING URL DETECTOR / STUDENT CYBERSECURITY PROJECT</span><span>RISK ASSESSMENT, NOT A VERDICT</span></footer>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
